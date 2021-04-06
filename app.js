@@ -99,9 +99,14 @@ function updateBubble(sample) {
         size: sample_Values,
         color: otu_Ids
       }
-
     };
-    Plotly.newPlot("bubble", [trace1]);
+    var layout = {
+      xaxis: {
+        title: "OTU ID"
+      }
+    };
+
+    Plotly.newPlot("bubble", [trace1], layout);
   });
 }
   
