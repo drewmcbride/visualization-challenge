@@ -64,32 +64,34 @@ function init() {
     // buildChart(firstSample);
 
 function updateChart() {
-  var displayBar = d3.select("#bar");
-  sample = d3.select("#selDataset").property("value")
+  d3.json("./samples.json").then((importedData) => {
+    var displayBar = d3.select("#bar");
+    sample = d3.select("#selDataset").property("value")
 
-  var samples = importedData.samples
-  var filteredSamples = samples.filter(row => row.id == sample)[0];
+    var samples = importedData.samples
+    var filteredSamples = samples.filter(row => row.id == sample)[0];
 
-  console.log(filteredSamples)
+    console.log(filteredSamples)
 
-  var otu_Ids = samples[0]["otu_ids"].slice(0,10).map(id => "otu"+String(id)).reverse()
-  var sample_Values = samples[0]["sample_values"].slice(0,10).reverse()
-  var otu_Labels = samples[0]["otu_Labels"]
+    var otu_Ids = filteredSamples[0]["otu_ids"].slice(0,10).map(id => "otu"+String(id)).reverse()
+    var sample_Values = filteredSamples[0]["sample_values"].slice(0,10).reverse()
+    var otu_Labels = filteredSamples[0]["otu_Labels"]
 
-  // console.log(sample_Values)
-  
-  var trace1 = {
-    type: "bar",
-    orientation: "h",
-    // mode: "lines",
-    // name: otu_Ids,
-    x: sample_Values,
-    y: otu_Ids,
-    // line: {
-    //   color: "#17BECF"
-    // }
-  };
-  Plotly.newPlot("bar", [trace1]);
+    // console.log(sample_Values)
+    
+    var trace1 = {
+      type: "bar",
+      orientation: "h",
+      // mode: "lines",
+      // name: otu_Ids,
+      x: sample_Values,
+      y: otu_Ids,
+      // line: {
+      //   color: "#17BECF"
+      // }
+    };
+    Plotly.newPlot("bar", [trace1]);
+  });
 }
 
 
@@ -99,7 +101,7 @@ function updateMetadata() {
     var displayPanel = d3.select("#sample-metadata");
     displayPanel.html("");
     var metaData = importedData.metadata;
-    console.log(metaData)
+    // console.log(metaData)
     sample = d3.select("#selDataset").property("value")
     // console.log(sample)
     
