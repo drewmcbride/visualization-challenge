@@ -121,19 +121,23 @@ function updateBubble(sample) {
 
     console.log(filteredSamples)
 
-    var otu_Ids = filteredSamples["otu_ids"].slice(0,10).map(id => "otu"+String(id)).reverse()
-    var sample_Values = filteredSamples["sample_values"].slice(0,10).reverse()
+    var otu_Ids = filteredSamples["otu_ids"]
+    var sample_Values = filteredSamples["sample_values"]
     var otu_Labels = filteredSamples["otu_Labels"]
 
     // console.log(sample_Values)
     
     var trace1 = {
-      type: "bubble",
-      orientation: "h",
-      // mode: "lines",
-      // name: otu_Ids,
-      x: sample_Values,
-      y: otu_Ids,
+      type: "scatter",
+      // orientation: "h",
+      mode: "markers",
+      // name: ,
+      x: otu_Ids,
+      y: sample_Values,
+      marker: {
+        size: sample_Values,
+        color: otu_Ids
+      }
       // line: {
       //   color: "#17BECF"
       // }
